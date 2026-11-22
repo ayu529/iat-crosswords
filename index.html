@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crossword</title>
+  <script>
+    // Apply the saved/system theme before first paint to avoid a flash.
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (t !== 'light' && t !== 'dark') t = 'dark'; // dark by default
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Crossword</h1>
+    <div class="actions">
+      <button id="checkBtn" type="button">Check</button>
+      <button id="newBtn" type="button" class="primary">New puzzle</button>
+      <label class="switch" title="Dark mode">
+        <span class="switch-label">Dark</span>
+        <input id="themeToggle" type="checkbox" role="switch" aria-label="Dark mode" />
+        <span class="track"><span class="thumb"></span></span>
+      </label>
+    </div>
+  </header>
+
+  <main>
+    <div id="boardWrap" class="board-wrap">
+      <div id="board" class="board" role="grid" aria-label="Crossword grid"></div>
+    </div>
+
+    <div id="clueBar" class="clue-bar" aria-live="polite"></div>
+    <p id="status" class="status" aria-live="polite"></p>
+
+    <section class="clues">
+      <div class="clue-col">
+        <h2>Across</h2>
+        <ol id="acrossList"></ol>
+      </div>
+      <div class="clue-col">
+        <h2>Down</h2>
+        <ol id="downList"></ol>
+      </div>
+    </section>
+  </main>
+
+  <script src="puzzles.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
